@@ -4,8 +4,8 @@
   "newProjectRoot": "projects",
   "projects": {
     "demo": {
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/core",
+      "sourceRoot": "projects/core/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -18,19 +18,19 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/demo",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "index": "projects/core/src/index.html",
+            "main": "projects/core/src/main.ts",
             "tsConfig": "./tsconfig.json",
             "assets": [],
-            "styles": ["src/global_styles.scss"],
+            "styles": ["projects/core/src/styles/global_styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/core/src/environments/environment.ts",
+                  "with": "projects/core/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -65,10 +65,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
+            "main": "projects/core/src/test.ts",
+            "polyfills": "projects/core/src/polyfills.ts",
+            "tsConfig": "projects/core/src/tsconfig.spec.json",
+            "karmaConfig": "projects/core/src/karma.conf.js",
             "styles": ["styles.css"],
             "scripts": [],
             "assets": ["src/favicon.ico", "src/assets"]
@@ -79,6 +79,72 @@
           "options": {
             "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "@libs/common-models": {
+      "projectType": "library",
+      "root": "projects/common-models",
+      "sourceRoot": "projects/common-models/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/common-models/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/common-models/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/common-models/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/common-models/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "@libs/common-ui": {
+      "projectType": "library",
+      "root": "projects/libs/common-ui",
+      "sourceRoot": "projects/libs/common-ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/libs/common-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/libs/common-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/libs/common-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/libs/common-ui/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

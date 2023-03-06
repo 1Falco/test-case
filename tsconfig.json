@@ -2,6 +2,18 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@common-models": [
+        "projects/libs/common-models/src/public-api.ts"
+      ],
+      "@libs/common-ui": [
+        "dist/libs/common-ui"
+      ],
+      "common-ui": [
+        "dist/common-ui",
+        "dist/common-ui"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,7 +29,7 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
   },
   "angularCompilerOptions": {
     "strictTemplates": true,
